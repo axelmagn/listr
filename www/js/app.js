@@ -1,37 +1,37 @@
 // Ionic Starter App
 
 
+var ListItem = function(name, description) {
+  this.type = "ListItem";
+  this.name = name;
+  this.description = description;
+  this.children = [];
+}
+
+
+ListItem.prototype.push = function(child) {
+  if(child.type !== "ListItem") {
+    throw new Error("Wrong Child Type");
+  }
+  this.children.push(child);
+}
+
 /*
    var ListItem = function(name, description) {
-   this.type = "ListItem";
-   this.name = name;
-   this.description = description;
-   this.children = [];
-   }
-
-
-   ListItem.prototype.push = function(child) {
+   var type = "ListItem";
+   var name = name;
+   var description = description;
+   var children = [];
+   return {
+   "push": function(child) {
    if(child.type !== "ListItem") {
    throw new Error("Wrong Child Type");
    }
-   this.children.push(child);
+   children.push(child);
    }
+   }
+   };
    */
-
-var ListItem = function(name, description) {
-  var type = "ListItem";
-  var name = name;
-  var description = description;
-  var children = [];
-  return {
-    "push": function(child) {
-      if(child.type !== "ListItem") {
-        throw new Error("Wrong Child Type");
-      }
-      children.push(child);
-    }
-  }
-};
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)

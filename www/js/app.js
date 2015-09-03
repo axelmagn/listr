@@ -4,9 +4,8 @@
   // the 2nd parameter is an array of 'requires'
   var app = angular.module('listr', ['ionic']);
 
-  app.controller('ListController', function() {
-
-    this.active_list = {
+  var listController = app.controller('ListController', ['$scope', '$stateParams', function($scope, $stateParams) {
+    $scope.active_list = {
       "name": "Negative Thinking",
       "children": [
         { "name": "Anger", "hasChildren": false },
@@ -15,9 +14,37 @@
         { "name": "Pride", "hasChildren": false },
         { "name": "Ignorance", "hasChildren": false },
       ]
-    
-    }
-  });
+    };
+
+    $scope.url_list = $stateParams.listID ? $stateParams.listID : "Root Lists";
+    // console.log('url_list:\t', $scope.url_list);
+  }]);
+
+
+  app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    // $urlRouterProvider.otherwise('/');
+
+    $stateProvider.state('home', {
+      url: '/',
+      templateUrl: 'partials/list-display.html',
+      controller: 'ListController'
+    });
+
+    $stateProvider.state('lists.root', {
+      url: '/lists',
+      templateUrl: 'partials/list-display.html',
+      controller: 'ListController'
+    });
+
+    $stateProvider.state('lists.display', {
+      url: '/lists/:listID',
+      templateUrl: 'partials/list-display.html',
+      // controller: 'ListController'
+      controller: function($stateParams) {
+        console.log('listID:\t', $stateParams.listID);
+      }
+    });
+  }]);
 
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

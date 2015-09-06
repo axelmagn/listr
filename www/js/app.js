@@ -22,7 +22,7 @@
 
 
   app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    // $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider.state('home', {
       url: '/',
@@ -30,19 +30,16 @@
       controller: 'ListController'
     });
 
-    $stateProvider.state('lists.root', {
+    $stateProvider.state('lists-root', {
       url: '/lists',
       templateUrl: 'partials/list-display.html',
       controller: 'ListController'
     });
 
-    $stateProvider.state('lists.display', {
+    $stateProvider.state('lists-display', {
       url: '/lists/:listID',
       templateUrl: 'partials/list-display.html',
-      // controller: 'ListController'
-      controller: function($stateParams) {
-        console.log('listID:\t', $stateParams.listID);
-      }
+      controller: 'ListController'
     });
   }]);
 

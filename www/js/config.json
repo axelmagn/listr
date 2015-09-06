@@ -1,7 +1,0 @@
-{
-    "resources": {
-        "pouchdb": {
-            "lists": "listr"
-        }
-    }
-}

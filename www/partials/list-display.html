@@ -1,0 +1,16 @@
+<!-- <ion-pane ng-controller="ListController as list"> -->
+
+<ion-view title="{{url_list}}">
+  <!--
+  <ion-header-bar class="bar-stable">
+    <h1 class="title">{{url_list}}</h1>
+  </ion-header-bar>
+  -->
+  <ion-content>
+    <ul class="list">
+      <li class="item" ng-repeat="child in active_list.children">
+        <a ng-href='#/lists/{{child.name}}'>{{child.name}}</a>
+      </li>
+    </ul>
+  </ion-content>
+</ion-view>

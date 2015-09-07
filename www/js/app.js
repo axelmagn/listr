@@ -2,23 +2,32 @@
   // angular.module is a global place for creating, registering and retrieving Angular modules
   // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
   // the 2nd parameter is an array of 'requires'
-  var app = angular.module('listr', ['ionic']);
+  var app = angular.module('listr', ['ionic', 'listr-ctrl']);
 
-  app.controller('ListController', function() {
+  // set up routes
+  app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
 
-    this.active_list = {
-      "name": "Negative Thinking",
-      "children": [
-        { "name": "Anger", "hasChildren": false },
-        { "name": "Jealousy", "hasChildren": false },
-        { "name": "Greed", "hasChildren": false },
-        { "name": "Pride", "hasChildren": false },
-        { "name": "Ignorance", "hasChildren": false },
-      ]
-    
-    }
-  });
+    $stateProvider.state('home', {
+      url: '/',
+      templateUrl: 'partials/list-display.html',
+      controller: 'ListController'
+    });
 
+    $stateProvider.state('lists-root', {
+      url: '/lists',
+      templateUrl: 'partials/list-display.html',
+      controller: 'ListController'
+    });
+
+    $stateProvider.state('lists-display', {
+      url: '/lists/:listID',
+      templateUrl: 'partials/list-display.html',
+      controller: 'ListController'
+    });
+  }]);
+
+  // ionic runtime stuff
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

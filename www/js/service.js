@@ -14,11 +14,15 @@
   srvc.factory('lists', ['config', 'pouchDB', function(config, pouchDB) {
     var listService = {};
 
+    // get or create lists database
     var dbname = config.resources.pouchdb.lists;
     if(!_.isString(dbname)) {
       throw new Error("Received a pouchdb dbname that isn't a string:\t", dbname);
     }
     var db = pouchDB(dbname);
+
+    
+
 
     var dummyList = {
       "name": "Negative Thinking",
